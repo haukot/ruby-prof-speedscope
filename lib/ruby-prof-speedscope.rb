@@ -17,7 +17,7 @@ module RubyProf
       @result.threads.each do |thread|
         thread.methods.each_with_index do |method, idx|
           next if frames.has_key?(method.object_id)
-          name = "#{method.klass_name}##{method.method_name}"
+          name = "#{method.klass_name}##{method.method_name.to_s.gsub('"', '\"')}"
           name += " *recursive*" if method.recursive?
           @output << <<~FRAME
             {
